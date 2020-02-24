@@ -6,16 +6,20 @@
 #include "PupilModel.cpp"
 using namespace std;
 
+int count;
+
 // Option 1:
 void Show_List() {
-  fstream fin;
+  ifstream fin;
   
-  fin.open("pupils_list.csv", ios::out | ios::app);
-  string line;
-  istringstream s(line);
-  string field;
-  while (getline(s, field,',')) {
-    cout << line;
+  fin.open("pupils_list.csv");
+  string Pupil_Name[100];
+  int i;
+  while (fin.good()) {
+    for (i = 1; i <= count; i++) {
+      getline(fin, Pupil_Name[i], ',');
+      cout << Pupil_Name[i];
+    }
   }
   fin.close();
 }
@@ -30,6 +34,8 @@ void Add_Pupil_Info_1() {
   cout << "Enter First & Last name of the student: ";
   cin >> First_Name >> Last_Name;
   PupilModel Pupil(First_Name, Last_Name);
-  fout << Pupil.getFullname() << "\n";
+  fout << Pupil.getFullname();
+  fout << "\n";
+  count++;
 }
 
