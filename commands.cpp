@@ -15,10 +15,15 @@ void Show_List() {
   fin.open("pupils_list.csv");
   string Pupil_Name[100];
   int i;
-  while (fin.good()) {
-    for (i = 1; i <= count; i++) {
-      getline(fin, Pupil_Name[i], ',');
-      cout << Pupil_Name[i];
+  if (count == 0) {
+    cout << "--|There is no students|--" << endl;
+  }
+  else {
+    while (fin.good()) {
+      for (i = 1; i <= count; i++) {
+        getline(fin, Pupil_Name[i], ',');
+        cout << Pupil_Name[i];
+      }
     }
   }
   fin.close();
