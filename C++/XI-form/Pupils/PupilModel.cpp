@@ -8,7 +8,9 @@ class PupilModel {
 		int Mark[100];
 	public:
 		int i = 1;
-  		PupilModel(string str1, string str2);
+		string getFName();
+		string getLName();
+  	PupilModel(string str1, string str2);
 		void setMark(int m);
 		int getMark();
 		float getAvMark(int j);
@@ -18,7 +20,17 @@ class PupilModel {
 PupilModel::PupilModel(string str1, string str2) {
 	FName = str1;
 	LName = str2;
+	string getFName();
+	string getLName();
 	string getFullname();
+}
+
+string PupilModel::getFName() { 
+	return FName;
+}
+
+string PupilModel::getLName() { 
+	return LName;
 }
 
 void PupilModel::setMark(int m) {

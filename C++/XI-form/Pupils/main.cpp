@@ -32,7 +32,7 @@ int main() {
       Add_Pupil_Info_1();
       break;
     case 3:
-      /* code */
+      Add_Pupil_Info_2();
       break;
     case 4:
       /* code */
