@@ -7,27 +7,27 @@
 using namespace std;
 
 int count;
+string Pupil_Name[100], FirstName[100], LastName[100];
 
 // Option 1: -- needs fixes
 void Show_List() {
   ifstream file;
-  string line;
+  string line, checker = ", ";
   int i;
 
   file.open("pupils_list.csv");
-  for (count = 0; getline(file, line); count++);
+  // cout << count << endl;
   if (count == 0) {
     cout << "--|There is no students|--" << endl;
   }
-    // needs fixes:
-  // else {
-  //   while (file.good()) {
-  //     for (i = 1; i <= count; i++) {
-  //       getline(file, Pupil_Name[i], '\n');
-  //       cout << Pupil_Name[i] << endl;
-  //     }
-  //   }
-  // }
+  else {
+    while (file.good()) {
+      for (i = 1; i <= count; i++) {
+        getline(file, Pupil_Name[i], ',');
+        cout << Pupil_Name[i];
+      }
+    }
+  }
   file.close();
 }
 
@@ -49,14 +49,14 @@ void Add_Pupil_Info_1() {
 // Option 3: -- works fine -- not enough
 void Add_Pupil_Info_2() {
   fstream file;
-  string Pupil, c, FirstName[100], LastName[100], line, checker = ", ";
+  string line, checker = ", ";
   stringstream s(line);
   int i;
   file.open("input_info.csv");
   for (count = 0; getline(file, line); count++);
   file.close();
 
-  // cout << count << endl;
+  
 
   file.open("input_info.csv");
   while (!file.eof() && i != count) {
@@ -71,8 +71,8 @@ void Add_Pupil_Info_2() {
 
   file.open("pupils_list.csv");
   for (i = 1; i <= count; i++) {
-    // PupilModel Stud(FirstName[i], LastName[i]);
-    file << /*Stud.getFName()*/FirstName[i] << ", " << /*Stud.getLName()*/LastName[i];
+    // PupilModel Pupil(FirstName[i], LastName[i]);
+    file << /*Pupil.getFName()*/FirstName[i] << ", " << /*Pupil.getLName()*/LastName[i];
     file << "\n";
     // Pupil_Name[count] = Stud.getFullname();
   }
