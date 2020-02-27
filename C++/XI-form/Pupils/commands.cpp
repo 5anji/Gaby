@@ -6,6 +6,8 @@
 #include "PupilModel.cpp"
 using namespace std;
 
+// cout << count << endl;
+
 int count;
 string Pupil_Name[100], FirstName[100], LastName[100];
 
@@ -16,7 +18,6 @@ void Show_List() {
   int i;
 
   file.open("pupils_list.csv");
-  // cout << count << endl;
   if (count == 0) {
     cout << "--|There is no students|--" << endl;
   }
@@ -48,33 +49,29 @@ void Add_Pupil_Info_1() {
 
 // Option 3: -- works fine -- not enough
 void Add_Pupil_Info_2() {
-  fstream file;
+  fstream file1, file2;
   string line, checker = ", ";
   stringstream s(line);
   int i;
-  file.open("input_info.csv");
-  for (count = 0; getline(file, line); count++);
-  file.close();
 
-  
+  file1.open("input_info.csv");
+    for (count = 0; getline(file1, line); count++);
+  file1.close();
 
-  file.open("input_info.csv");
-  while (!file.eof() && i != count) {
-    getline(file, FirstName[i], ',');
-    getline(file, LastName[i]);
-    // cout << FirstName[i] << " - " << LastName[i] << endl;      
+  file1.open("input_info.csv");
+  while (!file1.eof() && i <= count) {
+    getline(file1, FirstName[i], ',');
+    getline(file1, LastName[i]);
+    cout << FirstName[i] << " -" << LastName[i] << endl;
+
+    file2.open("pupils_list.csv", ios::out | ios::app);
+    PupilModel Pupil(FirstName[i], LastName[i]);
+    file2 << Pupil.getFName() << "," << Pupil.getLName();
+    file2 << "\n";
+    Pupil_Name[count] = Pupil.getFullname();
+    file2.close();
+        
     i++;
   }
-  file.close();
-
-  
-
-  file.open("pupils_list.csv");
-  for (i = 1; i <= count; i++) {
-    // PupilModel Pupil(FirstName[i], LastName[i]);
-    file << /*Pupil.getFName()*/FirstName[i] << ", " << /*Pupil.getLName()*/LastName[i];
-    file << "\n";
-    // Pupil_Name[count] = Stud.getFullname();
-  }
-  file.close();
+  file1.close();
 }
