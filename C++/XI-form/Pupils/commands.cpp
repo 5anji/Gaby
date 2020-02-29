@@ -55,7 +55,7 @@ void Add_Pupil_Info_2() {
   int i;
 
   file1.open("input_info.csv");
-    for (count = 0; getline(file1, line); count++);
+  for (count = 0; getline(file1, line); count++);
   file1.close();
 
   file1.open("input_info.csv");
@@ -63,14 +63,12 @@ void Add_Pupil_Info_2() {
     getline(file1, FirstName[i], ',');
     getline(file1, LastName[i]);
     cout << FirstName[i] << " -" << LastName[i] << endl;
-
     file2.open("pupils_list.csv", ios::out | ios::app);
     PupilModel Pupil(FirstName[i], LastName[i]);
     file2 << Pupil.getFName() << "," << Pupil.getLName();
     file2 << "\n";
     Pupil_Name[count] = Pupil.getFullname();
-    file2.close();
-        
+    file2.close();    
     i++;
   }
   file1.close();
