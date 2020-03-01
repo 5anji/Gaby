@@ -11,7 +11,7 @@ using namespace std;
 int count;
 string FirstName[100], LastName[100];
 
-// Option 1: -- needs fixes
+// Option 1:
 void Show_List() {
   ifstream file;
   string line, Pupil_Name;
@@ -49,7 +49,7 @@ void Add_Pupil_Info_1() {
   file.close();
 }
 
-// Option 3: -- works fine -- not enough
+// Option 3:
 void Add_Pupil_Info_2() {
   fstream file1, file2;
   string line, checker = ", ";
@@ -64,12 +64,10 @@ void Add_Pupil_Info_2() {
   while (!file1.eof() && i <= count) {
     getline(file1, FirstName[i], ',');
     getline(file1, LastName[i]);
-    cout << FirstName[i] << " -" << LastName[i] << endl;
     file2.open("pupils_list.csv", ios::out | ios::app);
     PupilModel Pupil(FirstName[i], LastName[i]);
     file2 << Pupil.getFName() << "," << Pupil.getLName();
     file2 << "\n";
-    // Pupil_Name[count] = Pupil.getFullname();
     file2.close();    
     i++;
   }
