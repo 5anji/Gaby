@@ -9,26 +9,28 @@ using namespace std;
 // cout << count << endl;
 
 int count;
-string Pupil_Name[100], FirstName[100], LastName[100];
+string FirstName[100], LastName[100];
 
 // Option 1: -- needs fixes
 void Show_List() {
   ifstream file;
-  string line, checker = ", ";
-  int i;
+  string line, Pupil_Name;
+  int i = 0;
 
   file.open("pupils_list.csv");
-  if (count == 0) {
-    cout << "--|There is no students|--" << endl;
-  }
-  else {
-    while (file.good()) {
-      for (i = 1; i <= count; i++) {
-        getline(file, Pupil_Name[i], ',');
-        cout << Pupil_Name[i];
+  while (file) {
+    getline(file, line);
+    istringstream ss(line);
+    while (getline(ss, Pupil_Name, ',')) {
+      if (i == 2) {
+        cout << endl;
+        i = 0;
       }
+      cout << Pupil_Name;
+      i++;
     }
-  }
+  }  
+  cout << endl;
   file.close();
 }
 
@@ -67,7 +69,7 @@ void Add_Pupil_Info_2() {
     PupilModel Pupil(FirstName[i], LastName[i]);
     file2 << Pupil.getFName() << "," << Pupil.getLName();
     file2 << "\n";
-    Pupil_Name[count] = Pupil.getFullname();
+    // Pupil_Name[count] = Pupil.getFullname();
     file2.close();    
     i++;
   }
