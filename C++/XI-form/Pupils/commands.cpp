@@ -4,6 +4,14 @@
 #include "PupilModel.cpp"
 using namespace std;
 
+// Tools:
+void swap(string *str1, string *str2) {
+  string temp;
+  temp = *str1;
+  *str1 = *str2;
+  *str2 = temp;
+}
+
 int st_count;
 string Pupil_Name[100], FirstName[100], LastName[100];
 
@@ -32,9 +40,7 @@ void Show_List() {
   for (i = 2; i <= n; i++) {
     for (j = 2; j <= n; j++) {
       if(Fullname[j-1] > Fullname[j]) {
-        temp = Fullname[j-1];
-        Fullname[j-1] = Fullname[j];
-        Fullname[j] = temp;
+        swap(Fullname[j-1], Fullname[j]);
       }
     }
   }
