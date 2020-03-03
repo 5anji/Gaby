@@ -1,6 +1,8 @@
 #include <iostream>
+#include <cctype>
 #include <fstream>
 #include <sstream>
+#include <cstring>
 #include "PupilModel.cpp"
 using namespace std;
 
@@ -12,20 +14,34 @@ void swap(string *str1, string *str2) {
   *str2 = temp;
 }
 
+bool check_number(string str) {
+  for (int i = 1; i < str.length(); i++) {
+    if (isdigit(str[i]) == false) return false;
+  }
+  return true;
+}
+// -------------
+
 int st_count;
-string Pupil_Name[100], FirstName[100], LastName[100];
+string Pupil_Name[256], FirstName[256], LastName[256];
 
 // Option 1:
 void Show_List() {
   ifstream file;
-  string line, word, Fullname[50], temp;
+  string line, word, Fullname[128], temp;
+  // char ar_word[128];
+  char c;
   int n = 0, i = 1, j = 0;
 
   file.open("pupils_list.csv");
   while (file) {
+    LOOP:
     getline(file, line);
     istringstream ss(line);
     while (getline(ss, word, ',')) {
+      // cout << word << endl;
+      // cin >> c;
+      if (check_number(word)) goto LOOP;
       Pupil_Name[i] = word;
       if ((i % 2 == 0) && (j % 2 == 1)) {
         n++;
@@ -34,6 +50,7 @@ void Show_List() {
       }      
       i++;
       j++;
+      
     }
   }
   
