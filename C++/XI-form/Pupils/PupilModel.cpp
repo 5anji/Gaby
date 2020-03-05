@@ -43,7 +43,7 @@ int PupilModel::getMark() {
 }
 
 string PupilModel::getFullname() {
-	return FName + " " + LName;
+	return FName + LName;
 }
 
 float PupilModel::getAvMark(int j) {

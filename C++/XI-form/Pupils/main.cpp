@@ -35,7 +35,7 @@ int main() {
       Add_Pupil_Info_2();
       break;
     case 4:
-      /* code */
+      Remove_Pupil(); 
       break;
     case 5:
       /* code */
