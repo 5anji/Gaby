@@ -29,39 +29,48 @@ void eraseFileLine(string path, string eraseLine) {
   ofstream temp;
   temp.open("temp.csv");
 
+  
+
   while (getline(fin, line)) {
+    // line.clear();
+    // cout << line << endl;
+    cout << line << endl;
+    if (line.find(eraseLine) != string::npos) {
+      cout << "HERE" << endl;
+      line.replace(0 , line.length(), "");
+    }
     if (line != eraseLine) temp << line << endl;
   }
 
   temp.close();
   fin.close();
 
-  const char * p = path.c_str();
+  const char *p = path.c_str();
   remove(p);
   rename("temp.csv", p);
 }
 // -------------
 
 int st_count;
-string Pupil_Name[256], FirstName[256], LastName[256];
+string FirstName[256], LastName[256];
 
 // Option 1:
 void Show_List() {
   ifstream file;
-  string line, word, Fullname[128];
+  string line, word, Fullname[128], Pupil_Name[256];
   // char ar_word[128];
   char c;
   int n = 0, i = 1, j = 0;
 
   file.open("pupils_list.csv");
   while (file) {
-    LOOP:
+    LOOP1:
     getline(file, line);
     istringstream ss(line);
     while (getline(ss, word, ',')) {
       // cout << word << endl;
       // cin >> c;
-      if (check_number(word)) goto LOOP;
+      if (check_number(word)) goto LOOP1;
       Pupil_Name[i] = word;
       if ((i % 2 == 0) && (j % 2 == 1)) {
         n++;
@@ -133,45 +142,41 @@ void Add_Pupil_Info_2() {
 
 // Option 4: Works bad
 void Remove_Pupil() {
-  fstream file;
+  ifstream file;
   ofstream temp;
-  string line, word, Fullname[128], checker, checker1;
+  string line, word, Fullname[128], Pupil_Name[256], checker, checker1;
   char c;
   int n = 0, i = 1, j = 0;
 
-  file.open("input_info.csv");
-  for (st_count = 0; getline(file, line); st_count++);
-  file.close();
-
   file.open("pupils_list.csv");
   while (file) {
-    LOOP:
+    LOOP2:
     getline(file, line);
     istringstream ss(line);
     while (getline(ss, word, ',')) {
       // cout << word << endl;
       // cin >> c;
-      if (check_number(word)) goto LOOP;
+      if (check_number(word)) goto LOOP2;
       Pupil_Name[i] = word;
       if ((i % 2 == 0) && (j % 2 == 1)) {
         n++;
-        PupilModel Pupil(Pupil_Name[j], Pupil_Name[i]);
-        Fullname[n] = Pupil.getFullname();
+        Fullname[n] = Pupil_Name[j] + "," + Pupil_Name[i];
       }      
       i++;
       j++;
     }
   }
-  
+  file.close();
+
   cout << "Input Pupil's Fullname to remove: ";
   cin >> checker >> checker1;
-  checker += " " + checker1;
+  checker += ", " + checker1;
   for (i = 1; i <= n; i++) {
+    // cout << "F: " <<  Fullname[i] << " C: " << checker << endl;
     if (Fullname[i] == checker) {
       eraseFileLine("pupils_list.csv", checker);
     }
   }
-  file.close();
   // remove("pupils_list.csv");
   // rename("temp.csv", "pupils_list.csv");
 }
