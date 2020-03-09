@@ -45,7 +45,6 @@ void eraseFileLine(string path, string eraseLine) {
 // -------------
 
 int st_count;
-string FirstName[256], LastName[256];
 
 // Option 1:
 void Show_List() {
@@ -108,7 +107,7 @@ void Add_Pupil_Info_1() {
 // Option 3:
 void Add_Pupil_Info_2() {
   fstream file1, file2;
-  string line, checker = ", ";
+  string FirstName[256], LastName[256], line, checker = ", ";
   stringstream s(line);
   int i;
 
@@ -133,7 +132,6 @@ void Add_Pupil_Info_2() {
 // Option 4:
 void Remove_Pupil() {
   ifstream file;
-  ofstream temp;
   string line, word, Fullname[128], Pupil_Name[256], checker, checker1;
   char c;
   int n = 0, i = 1, j = 0;
@@ -166,3 +164,85 @@ void Remove_Pupil() {
   }
 }
 
+// Option 5:
+void Add_Mark_1() {
+  ifstream file;
+  ofstream temp;
+  string line, word, Fullname[128], Pupil_Name[256], checker, checker1, mark;
+  int n = 0, i = 1, j = 0;
+
+  file.open("pupils_list.csv");
+  while (file) {
+    LOOP3:
+    getline(file, line);
+    istringstream ss(line);
+    while (getline(ss, word, ',')) {
+      if (check_number(word)) goto LOOP3;
+      Pupil_Name[i] = word;
+      if ((i % 2 == 0) && (j % 2 == 1)) {
+        n++;
+        Fullname[n] = Pupil_Name[j] + "," + Pupil_Name[i];
+      }      
+      i++;
+      j++;
+    }
+  }
+  file.close();
+
+  cout << "Input Pupil's Fullname to add a mark: ";
+  cin >> checker >> checker1;
+  checker += ", " + checker1;
+
+  for (i = 1; i <= n; i++) {
+    if (Fullname[i] == checker) {
+      cout << "Mark: ";
+      cin >> mark;
+      PupilModel Pupil(mark);
+      Pupil.setMark(stoi(mark));
+
+      file.open("pupils_list.csv");
+      temp.open("temp.csv");
+
+      while (getline(file, line)) {
+        if ( ! (line.find(checker) != string::npos)) {
+          temp << line << endl;
+        }
+        else {
+          temp << line + ", " + mark;
+        }
+      }
+
+      temp.close();
+      file.close();
+
+      remove("pupils_list.csv");
+      rename("temp.csv", "pupils_list.csv");
+    }
+  }
+}
+
+// Option 6:
+void Add_Mark_2() {
+  ifstream file;
+  ofstream temp;
+  string line, mark;
+  int n = 0, i = 1, j = 0;
+
+  cout << "Mark: ";
+  cin >> mark;
+  PupilModel Pupil(mark);
+  Pupil.setMark(stoi(mark));
+
+  file.open("pupils_list.csv");
+  temp.open("temp.csv");
+
+  while (getline(file, line)) {
+    temp << line + ", " + mark + "\n";
+  }
+
+  temp.close();
+  file.close();
+  
+  remove("pupils_list.csv");
+  rename("temp.csv", "pupils_list.csv");
+}

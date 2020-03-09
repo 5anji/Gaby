@@ -38,10 +38,10 @@ int main() {
       Remove_Pupil(); 
       break;
     case 5:
-      /* code */
+      Add_Mark_1();
       break;
     case 6:
-      /* code */
+      Add_Mark_2();
       break;
     case 7:
       /* code */

@@ -5,15 +5,16 @@ class PupilModel {
 	private:
 		string FName;
 		string LName;
-		int Mark[100];
+		int Mark[256];
 	public:
 		int i = 1;
 		string getFName();
 		string getLName();
   	PupilModel(string str1, string str2);
+    PupilModel(string mark);
 		void setMark(int m);
 		int getMark();
-		float getAvMark(int j);
+		float getAvMark();
 		string getFullname();
 };
 
@@ -23,6 +24,10 @@ PupilModel::PupilModel(string str1, string str2) {
 	string getFName();
 	string getLName();
 	string getFullname();
+}
+
+PupilModel::PupilModel(string mark) {
+  void setMark(int m);
 }
 
 string PupilModel::getFName() { 
@@ -46,9 +51,9 @@ string PupilModel::getFullname() {
 	return FName + LName;
 }
 
-float PupilModel::getAvMark(int j) {
+float PupilModel::getAvMark() {
 	float AvMark;
-	for ( j = 1; j <= i; j++) {
+	for (int j = 1; j <= i; j++) {
 		AvMark += Mark[j];
 	}
 	AvMark /= i;
