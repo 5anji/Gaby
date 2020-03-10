@@ -50,7 +50,6 @@ int st_count;
 void Show_List() {
   ifstream file;
   string line, word, Fullname[128], Pupil_Name[256];
-  char c;
   int n = 0, i = 1, j = 0;
 
   file.open("pupils_list.csv");
@@ -230,13 +229,13 @@ void Add_Mark_2() {
 
   cout << "Mark: ";
   cin >> mark;
-  PupilModel Pupil(mark);
-  Pupil.setMark(stoi(mark));
-
+  
   file.open("pupils_list.csv");
   temp.open("temp.csv");
 
   while (getline(file, line)) {
+    PupilModel Pupil(mark);
+    Pupil.setMark(stoi(mark));
     temp << line + ", " + mark + "\n";
   }
 
@@ -245,4 +244,52 @@ void Add_Mark_2() {
   
   remove("pupils_list.csv");
   rename("temp.csv", "pupils_list.csv");
+}
+
+// Option 7:
+void Show_Full_Info() {
+  ifstream file;
+  string word, line, Names[128], Marks[64][128], Pupil_Name[256];
+  int n = 0, i = 1, j = 0;
+  int m = 1, k = 1, temp = 1;
+
+  file.open("pupils_list.csv");
+  while(file) {
+    getline(file, line);
+    istringstream ss(line);
+    while (getline(ss, word, ',')) {
+      if (check_number(word)) {
+        Marks[temp][k] = word;
+        k++;
+        m++;
+      }
+      else {
+        Pupil_Name[i] = word;
+        if ((i % 2 == 0) && (j % 2 == 1)) {
+          n++;
+          PupilModel Pupil(Pupil_Name[j], Pupil_Name[i]);
+          Names[n] = Pupil.getFullname();
+        }      
+        i++;
+        j++;
+        
+      }
+      
+    }
+    temp++;    
+  }
+
+  
+  for (i = 1; i < n; i++) {
+    cout << "Fullname: ";
+    cout << Names[i];
+    cout << endl;
+    cout << "Marks: ";
+    for (k = 1; k <= m; k++) {
+      cout << Marks[i][k] + " ";
+    }
+    cout << endl;
+  }
+
+  file.close();
 }

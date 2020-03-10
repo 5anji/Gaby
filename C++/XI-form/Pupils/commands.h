@@ -6,3 +6,4 @@ void Add_Pupil_Info_2();
 void Remove_Pupil();
 void Add_Mark_1();
 void Add_Mark_2();
+void Show_Full_Info();

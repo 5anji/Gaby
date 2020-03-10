@@ -44,7 +44,7 @@ int main() {
       Add_Mark_2();
       break;
     case 7:
-      /* code */
+      Show_Full_Info();
       break;
     case 8:
       /* code */
