@@ -76,6 +76,7 @@ void Show_List() {
   string line, word, Fullname[128], Pupil_Name[256];
   int n = 0, i = 1, j = 0;
 
+  cout << "\033[34m*************************************************\033[0m" << endl;
   file.open("pupils_list.csv");
   while (file) {
     LOOP1:
@@ -108,6 +109,7 @@ void Show_List() {
     cout << endl;
   }
   file.close();
+  cout << "\033[34m*************************************************\033[0m" << endl;
 }
 
 // Option 2:
@@ -115,7 +117,9 @@ void Add_Pupil_Info_1() {
   string First_Name, Last_Name;
   fstream file;
 
+  cout << "\033[34m*************************************************\033[0m" << endl;
   file.open("pupils_list.csv", ios::out | ios::app);
+
   cout << "Enter First name of the student: ";
   cin >> First_Name;
   cout << "Enter Last name of the student: ";
@@ -124,7 +128,9 @@ void Add_Pupil_Info_1() {
   file << Pupil.getFName() << ", " << Pupil.getLName();
   file << "\n";
   st_count++;
+  
   file.close();
+  cout << "\033[34m*************************************************\033[0m" << endl;
 }
 
 // Option 3:
@@ -134,6 +140,7 @@ void Add_Pupil_Info_2() {
   stringstream s(line);
   int i;
 
+  cout << "\033[34m*************************************************\033[0m" << endl;
   file1.open("input_info.csv");
   for (st_count = 0; getline(file1, line); st_count++);
   file1.close();
@@ -150,6 +157,7 @@ void Add_Pupil_Info_2() {
     i++;
   }
   file1.close();
+  cout << "\033[34m*************************************************\033[0m" << endl;
 }
 
 // Option 4:
@@ -159,6 +167,7 @@ void Remove_Pupil() {
   char c;
   int n = 0, i = 1, j = 0;
 
+  cout << "\033[34m*************************************************\033[0m" << endl;
   file.open("pupils_list.csv");
   while (file) {
     LOOP2:
@@ -185,6 +194,7 @@ void Remove_Pupil() {
       eraseFileLine("pupils_list.csv", checker);
     }
   }
+  cout << "\033[34m*************************************************\033[0m" << endl;
 }
 
 // Option 5:
@@ -194,6 +204,7 @@ void Add_Mark_1() {
   string line, word, Fullname[128], Pupil_Name[256], checker, checker1, mark;
   int n = 0, i = 1, j = 0;
 
+  cout << "\033[34m*************************************************\033[0m" << endl;
   file.open("pupils_list.csv");
   while (file) {
     LOOP3:
@@ -220,8 +231,6 @@ void Add_Mark_1() {
     if (Fullname[i] == checker) {
       cout << "Mark: ";
       cin >> mark;
-      PupilModel Pupil(stoi(mark));
-      Pupil.setMark(stoi(mark));
 
       file.open("pupils_list.csv");
       temp.open("temp.csv");
@@ -242,6 +251,7 @@ void Add_Mark_1() {
       rename("temp.csv", "pupils_list.csv");
     }
   }
+  cout << "\033[34m*************************************************\033[0m" << endl;
 }
 
 // Option 6:
@@ -251,6 +261,7 @@ void Add_Mark_2() {
   string line, mark;
   int n = 0, i = 1, j = 0;
 
+  cout << "\033[34m*************************************************\033[0m" << endl;
   cout << "Mark: ";
   cin >> mark;
   
@@ -258,8 +269,6 @@ void Add_Mark_2() {
   temp.open("temp.csv");
 
   while (getline(file, line)) {
-    PupilModel Pupil(stoi(mark));
-    Pupil.setMark(stoi(mark));
     temp << line + ", " + mark + "\n";
   }
 
@@ -268,6 +277,7 @@ void Add_Mark_2() {
   
   remove("pupils_list.csv");
   rename("temp.csv", "pupils_list.csv");
+  cout << "\033[34m*************************************************\033[0m" << endl;
 }
 
 // Option 7:
@@ -277,6 +287,7 @@ void Show_Full_Info() {
   int n = 0, i = 1, j = 0, Marks[64][128];
   int m = 1, k = 1, temp = 1;
 
+  cout << "\033[34m*************************************************\033[0m" << endl;
   file.open("pupils_list.csv");
   while(file) {
     getline(file, line);
@@ -318,6 +329,7 @@ void Show_Full_Info() {
   }
 
   file.close();
+  cout << "\033[34m*************************************************\033[0m" << endl;
 }
 
 // Option 8:
@@ -327,6 +339,7 @@ void Show_MidMark() {
   int temp = 0;
   float mark = 0;
 
+  cout << "\033[34m*************************************************\033[0m" << endl;
   file.open("pupils_list.csv");
   while(file) {
     getline(file, line);
@@ -343,6 +356,7 @@ void Show_MidMark() {
   cout << "Class Mark is: " << mark << endl;
   
   file.close();
+  cout << "\033[34m*************************************************\033[0m" << endl;
 }
 
 // Option 9:
@@ -353,6 +367,7 @@ void Show_Max_MidMark() {
   int m = 1, k = 1, temp = 1;
   float tempMark[32], MarkChecker;
 
+  cout << "\033[34m*************************************************\033[0m" << endl;
   file.open("pupils_list.csv");
   while(file) {
     getline(file, line);
@@ -396,6 +411,7 @@ void Show_Max_MidMark() {
     }
   }
   file.close();
+  cout << "\033[34m*************************************************\033[0m" << endl;
 }
 
 // Option 10:
@@ -406,6 +422,7 @@ void Show_Min_MidMark() {
   int m = 1, k = 1, temp = 1;
   float tempMark[32], MarkChecker;
 
+  cout << "\033[34m*************************************************\033[0m" << endl;
   file.open("pupils_list.csv");
   while(file) {
     getline(file, line);
@@ -449,6 +466,7 @@ void Show_Min_MidMark() {
     }
   }
   file.close();
+  cout << "\033[34m*************************************************\033[0m" << endl;
 }
 
 // Option 11:
@@ -459,6 +477,7 @@ void Higher_X() {
   int m = 1, k = 1, temp = 1;
   float tempMark[32], MarkChecker;
 
+  cout << "\033[34m*************************************************\033[0m" << endl;
   file.open("pupils_list.csv");
   while(file) {
     getline(file, line);
@@ -517,6 +536,7 @@ void Higher_X() {
     cout << endl;
   }
   file.close();
+  cout << "\033[34m*************************************************\033[0m" << endl;
 }
 
 // Option 12:
@@ -527,6 +547,7 @@ void Lower_X() {
   int m = 1, k = 1, temp = 1;
   float tempMark[32], MarkChecker;
 
+  cout << "\033[34m*************************************************\033[0m" << endl;
   file.open("pupils_list.csv");
   while(file) {
     getline(file, line);
@@ -585,4 +606,5 @@ void Lower_X() {
     cout << endl;
   }
   file.close();
+  cout << "\033[34m*************************************************\033[0m" << endl;
 }
