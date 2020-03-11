@@ -42,6 +42,30 @@ void eraseFileLine(string path, string eraseLine) {
   remove(p);
   rename("temp.csv", p);
 }
+
+float findSmallestElement(float arr[], int n) {
+  float temp = arr[1];
+
+  for(int i = 1; i <= n; i++) {
+    if(temp > arr[i]) {
+      temp = arr[i];
+    }
+  }
+  
+  return temp;
+}
+
+float findLargestElement(float arr[], int n) {
+  float temp = arr[1];
+
+  for(int i = 1; i <= n; i++) {
+    if(temp < arr[i]) {
+      temp = arr[i];
+    }
+  }
+
+  return temp;
+}
 // -------------
 
 int st_count;
@@ -196,7 +220,7 @@ void Add_Mark_1() {
     if (Fullname[i] == checker) {
       cout << "Mark: ";
       cin >> mark;
-      PupilModel Pupil(mark);
+      PupilModel Pupil(stoi(mark));
       Pupil.setMark(stoi(mark));
 
       file.open("pupils_list.csv");
@@ -234,7 +258,7 @@ void Add_Mark_2() {
   temp.open("temp.csv");
 
   while (getline(file, line)) {
-    PupilModel Pupil(mark);
+    PupilModel Pupil(stoi(mark));
     Pupil.setMark(stoi(mark));
     temp << line + ", " + mark + "\n";
   }
@@ -319,4 +343,120 @@ void Show_MidMark() {
   cout << "Class Mark is: " << mark << endl;
   
   file.close();
+}
+
+// Option 9:
+void Show_Max_MidMark() {
+  ifstream file;
+  string word, line, Names[128], Pupil_Name[256];
+  int n = 0, i = 1, j = 0, Marks[64][128];
+  int m = 1, k = 1, temp = 1;
+  float tempMark[32], MarkChecker;
+
+  file.open("pupils_list.csv");
+  while(file) {
+    getline(file, line);
+    istringstream ss(line);
+    while (getline(ss, word, ',')) {
+      if (check_number(word)) {
+        Marks[temp][k] = stoi(word);
+        k++;
+        m++;
+      }
+      else {
+        Pupil_Name[i] = word;
+        if ((i % 2 == 0) && (j % 2 == 1)) {
+          n++;
+          PupilModel Pupil(Pupil_Name[j], Pupil_Name[i]);
+          Names[n] = Pupil.getFullname();
+        }      
+        i++;
+        j++;
+      }
+    }
+    temp++;    
+  }
+
+  for (i = 1; i <= n; i++) {
+    temp = 0;
+    for (k = 1; k <= m; k++) {
+      if (Marks[i][k] != 0) {
+        tempMark[i] += Marks[i][k];
+        temp++;
+      }
+    }
+    tempMark[i] /= temp;
+  }
+
+  MarkChecker = findLargestElement(tempMark, n);
+  
+  for (i = 1; i <= n; i++) {
+    if (MarkChecker == tempMark[i]) {
+      cout << Names[i] << endl; 
+    }
+  }
+  file.close();
+}
+
+// Option 10:
+void Show_Min_MidMark() {
+  ifstream file;
+  string word, line, Names[128], Pupil_Name[256];
+  int n = 0, i = 1, j = 0, Marks[64][128];
+  int m = 1, k = 1, temp = 1;
+  float tempMark[32], MarkChecker;
+
+  file.open("pupils_list.csv");
+  while(file) {
+    getline(file, line);
+    istringstream ss(line);
+    while (getline(ss, word, ',')) {
+      if (check_number(word)) {
+        Marks[temp][k] = stoi(word);
+        k++;
+        m++;
+      }
+      else {
+        Pupil_Name[i] = word;
+        if ((i % 2 == 0) && (j % 2 == 1)) {
+          n++;
+          PupilModel Pupil(Pupil_Name[j], Pupil_Name[i]);
+          Names[n] = Pupil.getFullname();
+        }      
+        i++;
+        j++;
+      }
+    }
+    temp++;    
+  }
+
+  for (i = 1; i <= n; i++) {
+    temp = 0;
+    for (k = 1; k <= m; k++) {
+      if (Marks[i][k] != 0) {
+        tempMark[i] += Marks[i][k];
+        temp++;
+      }
+    }
+    tempMark[i] /= temp;
+  }
+
+  MarkChecker = findSmallestElement(tempMark, n);
+  
+  for (i = 1; i <= n; i++) {
+    if (MarkChecker == tempMark[i]) {
+      cout << Names[i] << endl; 
+    }
+  }
+  file.close();
+}
+
+// Option 11:
+void Higher_X() {
+  // code
+}
+
+// Option 12:
+void Lower_X() {
+  // code
 }

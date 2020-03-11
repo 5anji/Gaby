@@ -7,11 +7,11 @@ class PupilModel {
 		string LName;
 		int Mark[256];
 	public:
-		int i = 1;
+		int i = 0;
 		string getFName();
 		string getLName();
   	PupilModel(string str1, string str2);
-    PupilModel(string mark);
+    PupilModel(int mark);
 		void setMark(int m);
 		int getMark();
 		float getAvMark();
@@ -26,8 +26,10 @@ PupilModel::PupilModel(string str1, string str2) {
 	string getFullname();
 }
 
-PupilModel::PupilModel(string mark) {
+PupilModel::PupilModel(int mark) {
+	i = mark;
   void setMark(int m);
+	float getAvMark();
 }
 
 string PupilModel::getFName() { 

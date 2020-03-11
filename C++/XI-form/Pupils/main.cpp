@@ -50,16 +50,16 @@ int main() {
       Show_MidMark();
       break;
     case 9:
-      /* code */
+      Show_Max_MidMark();
       break;
     case 10:
-      /* code */
+      Show_Min_MidMark();
       break;
     case 11:
-      /* code */
+      Higher_X();
       break;
     case 12:
-      /* code */
+      Lower_X();
       break;
     case 0:
       cout << "\033[1;31m-> EXIT <-\033[0m" << endl;
