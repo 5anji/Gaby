@@ -453,10 +453,136 @@ void Show_Min_MidMark() {
 
 // Option 11:
 void Higher_X() {
-  // code
+  ifstream file;
+  string word, line, Names[128], Names1[128], Pupil_Name[256];
+  int n = 0, i = 1, j = 0, Marks[64][128];
+  int m = 1, k = 1, temp = 1;
+  float tempMark[32], MarkChecker;
+
+  file.open("pupils_list.csv");
+  while(file) {
+    getline(file, line);
+    istringstream ss(line);
+    while (getline(ss, word, ',')) {
+      if (check_number(word)) {
+        Marks[temp][k] = stoi(word);
+        k++;
+        m++;
+      }
+      else {
+        Pupil_Name[i] = word;
+        if ((i % 2 == 0) && (j % 2 == 1)) {
+          n++;
+          PupilModel Pupil(Pupil_Name[j], Pupil_Name[i]);
+          Names[n] = Pupil.getFullname();
+        }      
+        i++;
+        j++;
+      }
+    }
+    temp++;    
+  }
+
+  for (i = 1; i <= n; i++) {
+    temp = 0;
+    for (k = 1; k <= m; k++) {
+      if (Marks[i][k] != 0) {
+        tempMark[i] += Marks[i][k];
+        temp++;
+      }
+    }
+    tempMark[i] /= temp;
+  }
+  
+  cout << "Input Mark(float), to show Pupils with Average mark Higher than it: ";
+  cin >> MarkChecker;
+  temp = 0;
+  for (i = 1; i <= n; i++) {
+    if (MarkChecker <= tempMark[i]) {
+      temp++;
+      Names1[temp] = Names[i];
+    }
+  }
+  
+  for (i = 2; i <= temp; i++) {
+    for (j = 2; j <= temp; j++) {
+      if(Names1[j-1] > Names1[j]) {
+        swap(Names1[j-1], Names1[j]);
+      }
+    }
+  }
+
+  for (i = 1; i <= temp; i++) {
+    cout << Names1[i];
+    cout << endl;
+  }
+  file.close();
 }
 
 // Option 12:
 void Lower_X() {
-  // code
+  ifstream file;
+  string word, line, Names[128], Names1[128], Pupil_Name[256];
+  int n = 0, i = 1, j = 0, Marks[64][128];
+  int m = 1, k = 1, temp = 1;
+  float tempMark[32], MarkChecker;
+
+  file.open("pupils_list.csv");
+  while(file) {
+    getline(file, line);
+    istringstream ss(line);
+    while (getline(ss, word, ',')) {
+      if (check_number(word)) {
+        Marks[temp][k] = stoi(word);
+        k++;
+        m++;
+      }
+      else {
+        Pupil_Name[i] = word;
+        if ((i % 2 == 0) && (j % 2 == 1)) {
+          n++;
+          PupilModel Pupil(Pupil_Name[j], Pupil_Name[i]);
+          Names[n] = Pupil.getFullname();
+        }      
+        i++;
+        j++;
+      }
+    }
+    temp++;    
+  }
+
+  for (i = 1; i <= n; i++) {
+    temp = 0;
+    for (k = 1; k <= m; k++) {
+      if (Marks[i][k] != 0) {
+        tempMark[i] += Marks[i][k];
+        temp++;
+      }
+    }
+    tempMark[i] /= temp;
+  }
+  
+  cout << "Input Mark(float), to show Pupils with Average mark Lower than it: ";
+  cin >> MarkChecker;
+  temp = 0;
+  for (i = 1; i <= n; i++) {
+    if (MarkChecker >= tempMark[i]) {
+      temp++;
+      Names1[temp] = Names[i];
+    }
+  }
+  
+  for (i = 2; i <= temp; i++) {
+    for (j = 2; j <= temp; j++) {
+      if(Names1[j-1] > Names1[j]) {
+        swap(Names1[j-1], Names1[j]);
+      }
+    }
+  }
+
+  for (i = 1; i <= temp; i++) {
+    cout << Names1[i];
+    cout << endl;
+  }
+  file.close();
 }
