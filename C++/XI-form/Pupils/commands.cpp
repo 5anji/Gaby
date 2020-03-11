@@ -249,8 +249,8 @@ void Add_Mark_2() {
 // Option 7:
 void Show_Full_Info() {
   ifstream file;
-  string word, line, Names[128], Marks[64][128], Pupil_Name[256];
-  int n = 0, i = 1, j = 0;
+  string word, line, Names[128], Pupil_Name[256];
+  int n = 0, i = 1, j = 0, Marks[64][128];
   int m = 1, k = 1, temp = 1;
 
   file.open("pupils_list.csv");
@@ -259,7 +259,7 @@ void Show_Full_Info() {
     istringstream ss(line);
     while (getline(ss, word, ',')) {
       if (check_number(word)) {
-        Marks[temp][k] = word;
+        Marks[temp][k] = stoi(word);
         k++;
         m++;
       }
@@ -280,13 +280,15 @@ void Show_Full_Info() {
   }
 
   
-  for (i = 1; i < n; i++) {
+  for (i = 1; i <= n; i++) {
     cout << "Fullname: ";
     cout << Names[i];
     cout << endl;
     cout << "Marks: ";
     for (k = 1; k <= m; k++) {
-      cout << Marks[i][k] + " ";
+      if (Marks[i][k] != 0) {
+        cout << Marks[i][k] << " ";
+      }
     }
     cout << endl;
   }
