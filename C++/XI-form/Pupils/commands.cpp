@@ -231,7 +231,7 @@ void Add_Mark_1() {
           temp << line << endl;
         }
         else {
-          temp << line + ", " + mark;
+          temp << line + ", " + mark + "\n";
         }
       }
 
