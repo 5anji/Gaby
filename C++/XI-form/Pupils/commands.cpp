@@ -15,7 +15,7 @@ void swap(string *str1, string *str2) {
 }
 
 bool check_number(string str) {
-  for (int i = 1; i < str.length(); i++) {
+  for (int i = 2; i < str.length(); i++) {
     if (isdigit(str[i]) == false) return false;
   }
   return true;
@@ -291,5 +291,30 @@ void Show_Full_Info() {
     cout << endl;
   }
 
+  file.close();
+}
+
+// Option 8:
+void Show_MidMark() {
+  ifstream file;
+  string word, line;
+  int temp = 0;
+  float mark = 0;
+
+  file.open("pupils_list.csv");
+  while(file) {
+    getline(file, line);
+    istringstream ss(line);
+    while (getline(ss, word, ',')) {
+      if (check_number(word)) {
+        mark += stoi(word);
+        temp++;
+      }
+    }
+  }
+  
+  mark /= temp;
+  cout << "Class Mark is: " << mark << endl;
+  
   file.close();
 }

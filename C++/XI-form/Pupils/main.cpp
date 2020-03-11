@@ -47,7 +47,7 @@ int main() {
       Show_Full_Info();
       break;
     case 8:
-      /* code */
+      Show_MidMark();
       break;
     case 9:
       /* code */
